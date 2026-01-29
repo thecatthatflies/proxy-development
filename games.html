@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Google</title>
+    <link rel="icon" href="https://www.google.com/favicon.ico" />
+    <link rel="stylesheet" href="games.css" />
+</head>
+
+<body>
+    <div id="window-overlay">
+        <div id="game-window">
+            <div id="window-bar">
+                <div class="window-bar-buttons">
+                    <button class="dot close" data-symbol="x" onclick="App.close()"></button>
+                    <button class="dot min" data-symbol="−" onclick="App.minimize()"></button>
+                    <button class="dot max" data-symbol="+" onclick="App.maximize()"></button>
+                </div>
+                <div id="win-title"></div>
+            </div>
+            <iframe id="game-frame"></iframe>
+        </div>
+    </div>
+
+    <header>
+        <input type="text" id="gameSearch" placeholder="SEARCH..." />
+        <div class="switchers">
+            <div class="switcher" id="theme-switcher">
+                <span id="theme-quartz" onclick="App.setTheme('quartz')">QUARTZ</span>
+                <span id="theme-slate" onclick="App.setTheme('slate')">SLATE</span>
+                <span id="theme-midnight" onclick="App.setTheme('midnight')">MIDNIGHT</span>
+            </div>
+            <div class="switcher" id="settings-trigger">
+                <span onclick="App.toggleSettings()">SETTINGS</span>
+            </div>
+            <div class="switcher" id="mode-switcher">
+                <span id="mode-window" onclick="App.setMode('window')">WINDOW</span>
+                <span id="mode-tab" onclick="App.setMode('tab')">TAB</span>
+            </div>
+        </div>
+    </header>
+
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <h3>SETTINGS</h3>
+            <div class="setting-item">
+                <label>PAGE TITLE</label>
+                <input type="text" id="cloak-title" placeholder="Google" />
+            </div>
+            <div class="setting-item">
+                <label>FAVICON URL</label>
+                <input type="text" id="cloak-favicon" placeholder="https://google.com/favicon.ico" />
+            </div>
+            <div class="modal-buttons">
+                <button class="save-btn" onclick="App.saveSettings()">SAVE SETTINGS</button>
+                <button class="close-btn" onclick="App.toggleSettings()">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <main id="gameList"></main>
+
+    <div id="restore-btn" onclick="App.restore()">RESTORE</div>
+
+    <script src="games.js"></script>
+</body>
+
+</html>

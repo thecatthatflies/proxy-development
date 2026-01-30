@@ -58,6 +58,7 @@ body {
     letter-spacing: 0.15em;
     overflow-x: hidden;
     transition: background-color var(--transition-main), color var(--transition-main);
+    scrollbar-gutter: stable;
 }
 
 header {
@@ -233,21 +234,24 @@ main {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--br);
+    background: var(--fg);
     border-radius: 6px;
     border: 3px solid transparent;
     background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--fg);
+    background: var(--accent);
     background-clip: padding-box;
 }
 
 
-/* Firefox Scrollbar */
+/* 
+ Firefox Scrollbar 
+ I'll support Firefox but fuck Safari
+*/
 
 * {
-    scrollbar-color: var(--br) transparent;
+    scrollbar-color: var(--fg) transparent;
     scrollbar-width: thin;
 }

@@ -36,9 +36,12 @@ const App = {
     if (!list) return;
 
     // Render game cards
-    list.innerHTML = GAMES.filter((g) =>
-      g.name.toLowerCase().includes(q.toLowerCase()),
-    )
+    list.innerHTML = GAMES.filter((g) => {
+      const name = g.name.toLowerCase();
+      const searchMatch = name.includes(q.toLowerCase());
+      const isExcluded = name.includes("chat") || name.includes("bot") || name.includes("ai");
+      return searchMatch && !isExcluded;
+    })
       .map(
         (g) =>
           `<div class="game-card" onclick="App.play('${g.id}')"><div>${g.name.toUpperCase()}</div></div>`,

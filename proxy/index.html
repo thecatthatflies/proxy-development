@@ -10,7 +10,9 @@
 
 <body>
     <header>
-        <a href="../homepage/index.html" class="logo"><h1>Newton</h1></a>
+        <a href="../homepage/index.html" class="logo">
+            <h1>Newton</h1>
+        </a>
         <div class="switchers">
             <div class="switcher" id="theme-switcher">
                 <span id="theme-quartz" onclick="App.setTheme('quartz')">QUARTZ</span>
@@ -22,44 +24,125 @@
     </header>
 
     <main id="content">
-      <p>Proxying is arriving soon. Stay tuned!</p>
-    </main>
+      <div class="browser-container">
+        <div class="browser-chrome">
+          <!-- Navigation Bar -->
+          <div class="nav-bar">
+            <div class="nav-controls">
+              <button type="button" class="nav-btn-control" id="back-btn" title="Back">←</button>
+              <button type="button" class="nav-btn-control" id="forward-btn" title="Forward">→</button>
+              <button type="button" class="nav-btn-control" id="refresh-btn" title="Refresh">⟲</button>
+            </div>
 
-    <div id="navbar-container"></div>
+            <!-- Address Bar -->
+            <div class="address-bar-container">
+              <input type="text" id="address-bar" class="address-bar" placeholder="Enter URL or search..." value="newton://proxy">
+              <button type="button" class="search-btn" id="search-btn">Go</button>
+            </div>
+            <button type="button" class="fullscreen-btn" id="fullscreen-btn" title="Fullscreen">⛶</button>
+          </div>
 
-    <script src="../components/componentLoader.js"></script>
-    <script>
-      const THEME_KEY = "newton-theme";
-      const App = {
-        init() {
-          this.loadTheme();
-          this.updateThemeSwitcher();
-        },
+          <!-- Tabs Bar -->
+          <div class="tabs-bar">
+            <div class="tab active" data-tab="0">
+              <span class="tab-title">newton://proxy</span>
+                <button type="button" class="tab-close">✕</button>
+            </div>
+            <button type="button" class="tab-add">+</button>
+        </div>
 
-        loadTheme() {
-          const theme = localStorage.getItem(THEME_KEY) || "midnight";
-          this.setTheme(theme);
-        },
+        <!-- Content Area -->
+        <div class="browser-content">
+            <div class="tab-content active" data-tab="0">
+            </div>
+        </div>
 
-        setTheme(theme) {
-          localStorage.setItem(THEME_KEY, theme);
-          document.documentElement.setAttribute("data-theme", theme);
-          this.updateThemeSwitcher();
-        },
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="status-text"></span>
+            <span id="page-info"></span>
+        </div>
+        </div>
+        </div>
+        </main>
 
-        updateThemeSwitcher() {
-          const theme = localStorage.getItem(THEME_KEY) || "midnight";
-          document.querySelectorAll(".switcher span").forEach((span) => {
-            span.classList.remove("active");
-          });
-          document.getElementById("theme-" + theme)?.classList.add("active");
-        },
-      };
+        <div id="navbar-container"></div>
 
-      document.addEventListener("DOMContentLoaded", () => {
-        App.init();
-        loadNavbar("../components/navbar.html");
-      });
-    </script>
-  </body>
+        <script src="../components/componentLoader.js"></script>
+        <script>
+            const THEME_KEY = "newton-theme";
+            const App = {
+                isFullscreen: false,
+
+                init() {
+                    this.loadTheme();
+                    this.updateThemeSwitcher();
+                    this.setupFullscreen();
+                },
+
+                loadTheme() {
+                    const theme = localStorage.getItem(THEME_KEY) || "midnight";
+                    this.setTheme(theme);
+                },
+
+                setTheme(theme) {
+                    localStorage.setItem(THEME_KEY, theme);
+                    document.documentElement.setAttribute("data-theme", theme);
+                    this.updateThemeSwitcher();
+                },
+
+                updateThemeSwitcher() {
+                    const theme = localStorage.getItem(THEME_KEY) || "midnight";
+                    document.querySelectorAll(".switcher span").forEach((span) => {
+                        span.classList.remove("active");
+                    });
+                    const themeElement = document.getElementById("theme-" + theme);
+                    if (themeElement) {
+                        themeElement.classList.add("active");
+                    }
+                },
+
+                setupFullscreen() {
+                    const fullscreenBtn = document.getElementById("fullscreen-btn");
+                    fullscreenBtn.addEventListener("click", () => this.toggleFullscreen());
+                },
+
+                // FRICK VSCODE WHY DID YOU BREAK OPTIONAL CHAINING IT MAKES IT SO MUCH EASIER TO READ
+                toggleFullscreen() {
+                    const browserChrome = document.querySelector(".browser-chrome");
+                    const header = document.querySelector("header");
+
+                    if (!this.isFullscreen) {
+                        if (browserChrome.requestFullscreen) {
+                            browserChrome.requestFullscreen();
+                        } else if (browserChrome.webkitRequestFullscreen) {
+                            browserChrome.webkitRequestFullscreen();
+                        } else if (browserChrome.mozRequestFullScreen) {
+                            browserChrome.mozRequestFullScreen();
+                        }
+
+                        header.style.display = "none";
+                        this.isFullscreen = true;
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        } else if (document.mozCancelFullScreen) {
+                            document.mozCancelFullScreen();
+                        }
+
+                        header.style.display = "";
+                        this.isFullscreen = false;
+                    }
+                },
+            };
+
+            document.addEventListener("DOMContentLoaded", () => {
+                App.init();
+                loadNavbar("../components/navbar.html");
+            });
+        </script>
+</body>
+
 </html>

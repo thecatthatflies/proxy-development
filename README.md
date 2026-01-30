@@ -1,3 +1,3 @@
 # Newton
 
-An innovative innovative built with modern web technologies.
+An innovative innovation built with not-so-modern web technologies.

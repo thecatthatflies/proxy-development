@@ -1,5 +1,32 @@
 @import url("../components/shared.css");
 
+/* Lucide Icons Styling */
+[data-lucide] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-lucide] svg {
+    width: 100%;
+    height: 100%;
+    color: inherit;
+}
+
+.dot [data-lucide] svg {
+    width: 0.6rem;
+    height: 0.6rem;
+}
+
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--br);
+}
+
 /* Input Styling */
 
 input {
@@ -137,10 +164,6 @@ input {
 
 .dot:active {
     transform: scale(0.9);
-}
-
-.dot:hover::after {
-    content: attr(data-symbol);
 }
 
 .close {
@@ -289,53 +312,6 @@ input {
     background: rgba(255, 255, 255, 0.05);
     border-color: var(--hl);
     color: var(--hl);
-}
-
-
-/* Bottom Navigation */
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: var(--bg);
-    border-top: 1px solid var(--br);
-    z-index: 100;
-}
-
-.nav-btn {
-    flex: 1;
-    max-width: 150px;
-    padding: 1rem 1.5rem;
-    border: 1px solid var(--br);
-    background: transparent;
-    color: var(--fg);
-    text-decoration: none;
-    font: inherit;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: inherit;
-    cursor: pointer;
-    transition: var(--transition-main);
-    text-align: center;
-    display: inline-block;
-}
-
-.nav-btn:hover {
-    border-color: var(--hl);
-    color: var(--hl);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.nav-btn.active {
-    border-color: var(--hl);
-    color: var(--hl);
-    background: rgba(255, 255, 255, 0.05);
 }
 
 

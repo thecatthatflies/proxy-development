@@ -14,9 +14,9 @@
         <div id="game-window">
             <div id="window-bar">
                 <div class="window-bar-buttons">
-                    <button class="dot close" data-symbol="x" onclick="App.close()"></button>
-                    <button class="dot min" data-symbol="−" onclick="App.minimize()"></button>
-                    <button class="dot max" data-symbol="+" onclick="App.maximize()"></button>
+                    <button class="dot close" title="Close" onclick="App.close()"><i data-lucide="x"></i></button>
+                    <button class="dot min" title="Minimize" onclick="App.minimize()"><i data-lucide="minus"></i></button>
+                    <button class="dot max" title="Maximize" onclick="App.maximize()"><i data-lucide="plus"></i></button>
                 </div>
                 <div id="win-title"></div>
             </div>
@@ -71,9 +71,13 @@
 
     <div id="navbar-container"></div>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="../components/componentLoader.js"></script>
     <script src="games.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+        });
         loadNavbar('../components/navbar.html');
     </script>
 </body>

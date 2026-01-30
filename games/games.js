@@ -138,18 +138,22 @@ const App = {
       .getPropertyValue("--bg")
       .trim();
 
+    // Get cloak settings
+    const cloakTitle = localStorage.getItem(CLOAK_TITLE_KEY) || "Google";
+    const cloakFavicon = localStorage.getItem(CLOAK_FAVICON_KEY) || "https://www.google.com/favicon.ico";
+
     // Payload shell for internal games
     const shell = (body) =>
-      `<!DOCTYPE html><html><head><title>Google</title><link rel="icon" href="https://www.google.com/favicon.ico"><style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:${bg};display:flex;align-items:center;justify-content:center;}iframe{width:100%;height:100%;border:none;}</style></head><body>${body}</body></html>`;
+      `<!DOCTYPE html><html><head><title>${cloakTitle}</title><link rel="icon" href="${cloakFavicon}"><style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:${bg};display:flex;align-items:center;justify-content:center;}iframe{width:100%;height:100%;border:none;}</style></head><body>${body}</body></html>`;
 
     // Inject content into iframe or new window
     const inject = (content, isRaw, win = null) => {
       const html = isRaw
         ? content
-            .replace(/<title>.*?<\/title>/i, "<title>Google</title>")
+            .replace(/<title>.*?<\/title>/i, `<title>${cloakTitle}</title>`)
             .replace(
               /<head>/i,
-              '<head><link rel="icon" href="https://www.google.com/favicon.ico">',
+              `<head><link rel="icon" href="${cloakFavicon}">`,
             )
         : shell(content);
 
@@ -157,6 +161,7 @@ const App = {
         win.document.open();
         win.document.write(html);
         win.document.close();
+        win.document.title = cloakTitle;
       } else {
         EL("game-frame").srcdoc = html;
         EL("window-overlay").style.display = "flex";

@@ -3,6 +3,19 @@ body {
     padding: 0 0 120px 0;
 }
 
+/* Lucide Icons Styling */
+[data-lucide] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-lucide] svg {
+    width: 100%;
+    height: 100%;
+    color: inherit;
+}
+
 header {
     padding: 1rem;
     margin: 0;

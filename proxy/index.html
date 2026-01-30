@@ -29,9 +29,9 @@
           <!-- Navigation Bar -->
           <div class="nav-bar">
             <div class="nav-controls">
-              <button type="button" class="nav-btn-control" id="back-btn" title="Back">←</button>
-              <button type="button" class="nav-btn-control" id="forward-btn" title="Forward">→</button>
-              <button type="button" class="nav-btn-control" id="refresh-btn" title="Refresh">⟲</button>
+              <button type="button" class="nav-btn-control" id="back-btn" title="Back"><i data-lucide="arrow-left"></i></button>
+              <button type="button" class="nav-btn-control" id="forward-btn" title="Forward"><i data-lucide="arrow-right"></i></button>
+              <button type="button" class="nav-btn-control" id="refresh-btn" title="Refresh"><i data-lucide="rotate-cw"></i></button>
             </div>
 
             <!-- Address Bar -->
@@ -39,16 +39,16 @@
               <input type="text" id="address-bar" class="address-bar" placeholder="Enter URL or search..." value="newton://proxy">
               <button type="button" class="search-btn" id="search-btn">Go</button>
             </div>
-            <button type="button" class="fullscreen-btn" id="fullscreen-btn" title="Fullscreen">⛶</button>
+            <button type="button" class="fullscreen-btn" id="fullscreen-btn" title="Fullscreen"><i data-lucide="maximize"></i></button>
           </div>
 
           <!-- Tabs Bar -->
           <div class="tabs-bar">
             <div class="tab active" data-tab="0">
               <span class="tab-title">newton://proxy</span>
-                <button type="button" class="tab-close">✕</button>
+                <button type="button" class="tab-close" title="Close tab"><i data-lucide="x"></i></button>
             </div>
-            <button type="button" class="tab-add">+</button>
+            <button type="button" class="tab-add" title="New tab"><i data-lucide="plus"></i></button>
         </div>
 
         <!-- Content Area -->
@@ -68,6 +68,7 @@
 
         <div id="navbar-container"></div>
 
+        <script src="https://unpkg.com/lucide@latest"></script>
         <script src="../components/componentLoader.js"></script>
         <script>
             const THEME_KEY = "newton-theme";
@@ -141,6 +142,7 @@
             document.addEventListener("DOMContentLoaded", () => {
                 App.init();
                 loadNavbar("../components/navbar.html");
+                lucide.createIcons();
             });
         </script>
 </body>

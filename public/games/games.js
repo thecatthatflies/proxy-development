@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Games library management and UI logic
  */
@@ -639,4 +641,8 @@ const App = {
 };
 
 // Initialize
-document.addEventListener("DOMContentLoaded", () => App.init());
+document.addEventListener("DOMContentLoaded", () => {
+  App.init();
+  loadNavbar("../components/navbar.html");
+  lucide.createIcons();
+});

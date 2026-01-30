@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Centralized theme management module
  */

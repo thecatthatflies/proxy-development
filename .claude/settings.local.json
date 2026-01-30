@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -lh \"c:\\\\Users\\\\jiupr\\\\OneDrive\\\\Desktop\\\\Programming\\\\Github\\\\proxy-development\\\\public\\\\proxy\"\" | grep -E \"newtab)",
+      "Bash(index \")"
+    ]
+  }
+}

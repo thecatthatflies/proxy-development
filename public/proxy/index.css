@@ -323,3 +323,73 @@ header {
     padding: 0.5rem 0.75rem;
   }
 }
+
+/* 404 Error Page */
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.error-content {
+  text-align: center;
+  max-width: 500px;
+  padding: 3rem 2rem;
+  border: 1px solid var(--br);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.error-title {
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.error-subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--hl);
+  margin: 1rem 0 1.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.error-message {
+  color: var(--fg);
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.error-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: var(--transition-main);
+  border: 1px solid var(--accent);
+}
+
+.error-button:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-light);
+  box-shadow: 0 4px 12px rgba(241, 80, 37, 0.3);
+  transform: translateY(-2px);
+}
+
+.error-button:active {
+  transform: translateY(0);
+}

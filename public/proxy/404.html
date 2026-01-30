@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Newton - Error</title>
     <base href="/" />
-    <link rel="stylesheet" href="proxy-current/index.css" />
-    <script src="proxy-current/register-sw.js"></script>
+    <link rel="stylesheet" href="proxy/index.css" />
+    <script src="proxy/register-sw.js"></script>
 </head>
 <body>
-    <div style="padding: 2rem;">
-        <h1 style="color: var(--accent, #f15025);">Newton Proxy Error</h1>
-        <p style="color: var(--fg, #888);">The server could not route your request.</p>
-        <p style="color: var(--fg, #888);">Please check the URL and try again.</p>
+    <div class="error-page">
+        <div class="error-content">
+            <h1 class="error-title">404</h1>
+            <h2 class="error-subtitle">Page Not Found</h2>
+            <p class="error-message">The server could not route your request.</p>
+            <p class="error-message">Please check the URL and try again.</p>
+            <a href="/proxy/index.html" class="error-button">Go to Proxy</a>
+        </div>
     </div>
 </body>
 </html>

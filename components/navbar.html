@@ -6,8 +6,8 @@
 
 <script>
     function setActiveNav() {
-        const path = window.location.pathname;
-        const isHomepage = path.includes('/homepage') || path === '/' || path.endsWith('index.html');
+        const path = window.location.pathname.toLowerCase();
+        const isHomepage = path.includes('/homepage') || path === '/';
 
         // Set href links based on current location
         document.getElementById('nav-home').href = isHomepage ? './' : '../homepage/index.html';

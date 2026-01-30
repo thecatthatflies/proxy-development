@@ -5,8 +5,12 @@
     --fg: #555;
     --hl: #eee;
     --br: #111;
+    --accent: #f15025;
+    --accent-light: #f27645;
+    --accent-dark: #d43d1f;
     --transition-main: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 
 /* Themes */
 
@@ -15,6 +19,9 @@
     --fg: #666;
     --hl: #000;
     --br: #eee;
+    --accent: #d43d1f;
+    --accent-light: #f15025;
+    --accent-dark: #b83318;
 }
 
 [data-theme="slate"] {
@@ -22,6 +29,9 @@
     --fg: #888;
     --hl: #eee;
     --br: #333;
+    --accent: #f15025;
+    --accent-light: #f27645;
+    --accent-dark: #d43d1f;
 }
 
 [data-theme="midnight"] {
@@ -29,6 +39,9 @@
     --fg: #777;
     --hl: #fff;
     --br: #222;
+    --accent: #f27645;
+    --accent-light: #f39a66;
+    --accent-dark: #f15025;
 }
 
 * {
@@ -91,11 +104,11 @@ main {
 
 .switcher span:hover,
 .switcher .active {
-    color: var(--hl);
+    color: var(--accent);
 }
 
 .switcher .active {
-    border-color: var(--hl);
+    border-color: var(--accent);
 }
 
 .section {
@@ -135,9 +148,9 @@ main {
 
 .btn {
     padding: 1rem 1.5rem;
-    border: 1px solid var(--br);
+    border: 1px solid var(--accent);
     background: transparent;
-    color: var(--hl);
+    color: var(--accent);
     cursor: pointer;
     text-decoration: none;
     font: inherit;
@@ -151,9 +164,10 @@ main {
 }
 
 .btn:hover {
-    border-color: var(--hl);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent-light);
+    background: rgba(241, 80, 37, 0.1);
 }
+
 
 /* Bottom Navigation */
 
@@ -189,16 +203,17 @@ main {
 }
 
 .nav-btn:hover {
-    border-color: var(--hl);
-    color: var(--hl);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(241, 80, 37, 0.1);
 }
 
 .nav-btn.active {
-    border-color: var(--hl);
-    color: var(--hl);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(241, 80, 37, 0.1);
 }
+
 
 /* Custom Scrollbar */
 
@@ -222,7 +237,9 @@ main {
     background-clip: padding-box;
 }
 
+
 /* Firefox Scrollbar */
+
 * {
     scrollbar-color: var(--br) transparent;
     scrollbar-width: thin;

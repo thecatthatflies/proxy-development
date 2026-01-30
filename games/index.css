@@ -15,21 +15,21 @@ input {
 }
 
 #gameSearch {
-    border-bottom: 1px solid var(--br);
     flex: 1;
     min-width: 12rem;
     background: transparent;
     color: var(--hl);
-    padding: 1rem 0;
+    padding: 0;
     outline: none;
     font: inherit;
     letter-spacing: inherit;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
 }
 
 #gameSearch::placeholder {
     color: var(--fg);
 }
+
 
 /* Games Grid */
 
@@ -106,6 +106,8 @@ input {
 }
 
 #window-bar {
+    display: flex;
+    align-items: center;
     background: var(--br);
     padding: 0.8rem 1.2rem;
     justify-content: space-between;
@@ -154,6 +156,7 @@ input {
 }
 
 .window-bar-buttons {
+    display: flex;
     gap: 0.6rem;
 }
 

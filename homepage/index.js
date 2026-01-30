@@ -22,7 +22,13 @@ const App = {
         document.querySelectorAll(".switcher span").forEach((span) => {
             span.classList.remove("active");
         });
-        document.getElementById("theme-" + theme) ? .classList.add("active");
+
+        // document.getElementById("theme-" + theme) ?.classList.add("active");
+        // frick prettier making "?." into "? ." i wanted to use optional chaining but whatever
+        const themeElement = document.getElementById("theme-" + theme);
+        if (themeElement) {
+            themeElement.classList.add("active");
+        }
     }
 };
 

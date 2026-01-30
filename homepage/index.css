@@ -28,8 +28,8 @@ main {
 }
 
 .card:hover {
-    border-color: var(--fg);
-    background: rgba(255, 255, 255, 0.01);
+    border-color: var(--accent);
+    background: rgba(241, 80, 37, 0.08);
 }
 
 .card h3 {

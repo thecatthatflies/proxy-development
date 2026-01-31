@@ -1,6 +1,7 @@
 /* Constants */
 
 :root {
+	/* Colors */
 	--bg: #050505;
 	--fg: #555;
 	--hl: #eee;
@@ -8,6 +9,12 @@
 	--accent: #f15025;
 	--accent-light: #f27645;
 	--accent-dark: #d43d1f;
+
+	/* Typography */
+	--font-display: "Inter", "Segoe UI", sans-serif;
+	--font-mono: "JetBrains Mono", "Courier New", monospace;
+
+	/* Effects */
 	--transition-main: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -55,17 +62,12 @@ button {
 body {
 	background: var(--bg);
 	color: var(--fg);
-	font:
-		clamp(9px, 0.8vw + 6px, 11px) / 1.6 "JetBrains Mono",
-		monospace;
+	font: clamp(9px, 0.8vw + 6px, 11px) / 1.6 var(--font-mono);
 	margin: 0;
 	padding: 5vh 8vw 120px 8vw;
 	text-transform: uppercase;
 	letter-spacing: 0.15em;
 	overflow-x: hidden;
-	transition:
-		background-color var(--transition-main),
-		color var(--transition-main);
 	scrollbar-gutter: stable;
 }
 
@@ -78,10 +80,11 @@ header {
 	padding-bottom: 0.5rem;
 	flex-wrap: wrap;
 	gap: 1.5rem;
-}
 
-header h1 {
-	margin: 0;
+	& h1 {
+		margin: 0;
+		font-family: var(--font-display);
+	}
 }
 
 header a.logo {
@@ -157,6 +160,7 @@ main {
 .card h3 {
 	margin: 0;
 	font-size: 1.1rem;
+	font-family: var(--font-display);
 }
 
 .card p {
@@ -172,7 +176,7 @@ main {
 	color: var(--accent);
 	cursor: pointer;
 	text-decoration: none;
-	font: inherit;
+	font-family: var(--font-display);
 	font-size: 0.75rem;
 	text-transform: uppercase;
 	letter-spacing: inherit;
@@ -211,7 +215,7 @@ main {
 	background: transparent;
 	color: var(--fg);
 	text-decoration: none;
-	font: inherit;
+	font-family: var(--font-display);
 	font-size: 0.75rem;
 	text-transform: uppercase;
 	letter-spacing: inherit;

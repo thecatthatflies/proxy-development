@@ -1,0 +1,9 @@
+@import url("../components/shared.css");
+
+h2 {
+  font-family: var(--font-display);
+}
+
+h3 {
+  font-family: var(--font-display);
+}

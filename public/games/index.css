@@ -1,21 +1,53 @@
 @import url("../components/shared.css");
 
-/* Lucide Icons Styling */
+/* Lucide Icons */
 [data-lucide] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
 
-[data-lucide] svg {
-  width: 100%;
-  height: 100%;
-  color: inherit;
+  & svg {
+    width: 100%;
+    height: 100%;
+    color: inherit;
+  }
 }
 
 .dot [data-lucide] svg {
   width: 0.6rem;
   height: 0.6rem;
+}
+
+/* Header Switchers */
+.switchers {
+  gap: 0.75rem;
+}
+
+.switcher {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 0.75rem;
+  gap: 0.5rem;
+}
+
+.switcher button {
+  font-size: 0.65rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--br);
+  border-radius: 3px;
+  transition: var(--transition-main);
+
+  &:hover {
+    border-color: var(--fg);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--hl);
+  }
+
+  &.active {
+    border-color: var(--accent);
+    background: rgba(241, 80, 37, 0.12);
+    color: var(--accent);
+  }
 }
 
 /* Header */
@@ -25,79 +57,89 @@ header {
   z-index: 50;
   background: var(--bg);
   border-bottom: 1px solid var(--br);
+  padding: 1rem 1.5rem !important;
+  margin-bottom: 0 !important;
+  gap: 1.25rem;
 }
 
 /* Input Styling */
-
 input {
   flex: 1;
-  min-width: 12rem;
-  background: transparent;
-  border: none;
+  min-width: 14rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--br);
   color: var(--hl);
-  padding: 1rem 0;
+  padding: 0.5rem 0.875rem;
   outline: none;
   font: inherit;
   letter-spacing: inherit;
+  transition: border-color var(--transition-main), background var(--transition-main), box-shadow var(--transition-main);
+
+  &::placeholder {
+    color: var(--fg);
+    opacity: 0.7;
+  }
+
+  &:hover {
+    border-color: var(--fg);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &:focus {
+    border-color: var(--accent);
+    background: rgba(241, 80, 37, 0.04);
+    box-shadow: 0 0 0 2px rgba(241, 80, 37, 0.08);
+  }
 }
 
 #gameSearch {
-  flex: 1;
-  min-width: 12rem;
-  background: transparent;
-  color: var(--hl);
-  padding: 0;
-  outline: none;
-  font: inherit;
-  letter-spacing: inherit;
   margin-bottom: 0;
 }
 
-#gameSearch::placeholder {
-  color: var(--fg);
-}
-
 /* Games Grid */
-
 #gameList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(200px, 90vw, 260px), 1fr));
+  gap: 0.75rem;
 }
 
 .game-card {
-  padding: 1rem;
+  padding: 1.25rem;
   border: 1px solid var(--br);
   cursor: pointer;
-  transition: var(--transition-main);
+  transition: border-color var(--transition-main), background var(--transition-main);
+  display: flex;
+  align-items: center;
   justify-content: center;
   min-height: 4rem;
   text-align: center;
-}
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.005);
 
-.game-card:hover {
-  border-color: var(--fg);
-  color: var(--hl);
-  background: rgba(255, 255, 255, 0.02);
-  transform: translateY(-2px);
+  &:hover {
+    border-color: var(--accent);
+    color: var(--hl);
+    background: rgba(241, 80, 37, 0.08);
+  }
 }
 
 /* Game Window */
-
 #window-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   display: none;
+  place-items: center;
   justify-content: center;
-  align-items: center;
   z-index: 676;
   backdrop-filter: blur(4px);
 }
 
 #game-window {
-  width: 90vw;
-  height: 85vh;
+  width: clamp(80vw, 90vw, 100vw);
+  height: clamp(70vh, 85vh, 100vh);
   background: var(--bg);
   border: 1px solid var(--br);
   border-radius: 0.5rem;
@@ -107,25 +149,25 @@ input {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   transform: translateY(40px) scale(0.92);
   opacity: 0;
-  transition: 0.3s ease;
-}
+  transition: transform 0.3s ease, opacity 0.3s ease;
 
-#game-window.active {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
+  &.active {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 
-#game-window.maximized {
-  width: 100vw !important;
-  height: 100vh !important;
-  border-radius: 0;
-  border: none;
-}
+  &.maximized {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
 
-#game-window.minimized {
-  transform: translateY(100vh) scale(0.6);
-  opacity: 0;
-  pointer-events: none;
+  &.minimized {
+    transform: translateY(100vh) scale(0.6);
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 #window-bar {
@@ -151,39 +193,39 @@ input {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: var(--transition-main);
+  transition: transform var(--transition-main), opacity var(--transition-main);
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.dot:hover {
-  transform: scale(1.15);
-}
+  & i {
+    display: none;
+  }
 
-.dot:active {
-  transform: scale(0.9);
-}
+  &:hover {
+    transform: scale(1.15);
+  }
 
-.dot i {
-  display: none;
-}
+  &:active {
+    transform: scale(0.9);
+  }
 
-.close {
-  background: #ff5f57;
-}
+  &.close {
+    background: #ff5f57;
+  }
 
-.min {
-  background: #febc2e;
-}
+  &.min {
+    background: #febc2e;
+  }
 
-.max {
-  background: #28c840;
+  &.max {
+    background: #28c840;
+  }
 }
 
 #win-title {
-  font-size: 0.7rem;
+  font-size: clamp(0.65rem, 1vw, 0.85rem);
   font-weight: 600;
   opacity: 0.6;
 }
@@ -208,16 +250,15 @@ input {
   cursor: pointer;
   display: none;
   z-index: 677;
-  transition: var(--transition-main);
-}
+  transition: color var(--transition-main), border-color var(--transition-main);
 
-#restore-btn:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
 }
 
 /* Settings Modal */
-
 .modal {
   position: fixed;
   inset: 0;
@@ -226,92 +267,129 @@ input {
   align-items: center;
   justify-content: center;
   z-index: 1000;
-}
 
-.modal.active {
-  display: flex;
+  &.active {
+    display: flex;
+  }
 }
 
 .modal-content {
   background: var(--bg);
   border: 1px solid var(--br);
-  padding: 2rem;
-  width: min(90%, 360px);
+  border-radius: 8px;
+  padding: clamp(1.5rem, 5vw, 2rem);
+  width: min(90%, 400px);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-}
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 
-.modal-content h3 {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--hl);
-  border-bottom: 1px solid var(--br);
-  padding-bottom: 1rem;
+  & h3 {
+    margin: 0;
+    font-size: clamp(0.75rem, 2vw, 0.95rem);
+    color: var(--hl);
+    font-family: var(--font-display);
+    font-weight: 600;
+    border-bottom: 1px solid var(--br);
+    padding-bottom: 1rem;
+  }
 }
 
 .setting-item {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
+  gap: 0.6rem;
 
-.setting-item label {
-  font-size: 0.6rem;
-  color: var(--fg);
-}
+  & label {
+    font-size: 0.65rem;
+    color: var(--fg);
+    font-weight: 500;
+  }
 
-.setting-item.row {
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
+  &.row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-.setting-item.row input {
-  flex: 0;
-  min-width: auto;
-  width: 1rem;
-  height: 1rem;
-  cursor: pointer;
-}
+    & input {
+      flex: 0;
+      min-width: auto;
+      width: 1rem;
+      height: 1rem;
+      cursor: pointer;
+    }
+  }
 
-.setting-item input:not([type="checkbox"]) {
-  border-bottom: 1px solid var(--br);
-  font-size: 0.75rem;
-  padding: 0.5rem 0;
+  & input:not([type="checkbox"]) {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--br);
+    border-radius: 4px;
+    color: var(--hl);
+    font-size: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+    transition: border-color var(--transition-main), background var(--transition-main);
+
+    &::placeholder {
+      color: var(--fg);
+    }
+
+    &:hover {
+      border-color: var(--fg);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(241, 80, 37, 0.05);
+    }
+  }
 }
 
 .modal-buttons {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
+  margin-top: 1rem;
+
+  & button {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--br);
+    color: var(--fg);
+    padding: 0.65rem 0.75rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font: inherit;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    transition: background var(--transition-main), border-color var(--transition-main), color var(--transition-main);
+
+    &.save-btn {
+      background: transparent;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    &.save-btn:hover {
+      background: rgba(241, 80, 37, 0.1);
+      border-color: var(--accent-light);
+      color: var(--accent-light);
+    }
+
+    &.close-btn {
+      border-color: var(--br);
+      color: var(--fg);
+    }
+
+    &.close-btn:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--fg);
+      color: var(--hl);
+    }
+  }
 }
 
-.modal-buttons button {
-  flex: 1;
-  background: transparent;
-  border: 1px solid var(--br);
-  color: var(--fg);
-  padding: 0.7rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  font: inherit;
-  font-size: 0.65rem;
-  transition: var(--transition-main);
-}
-
-.modal-buttons .save-btn {
-  border-color: var(--hl);
-  color: var(--hl);
-}
-
-.modal-buttons button:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--hl);
-  color: var(--hl);
-}
-
-/*
-Responsiveness
-Just kidding no one cares about responsiveness
-*/

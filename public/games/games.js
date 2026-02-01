@@ -60,6 +60,7 @@ const App = {
         this.updateUI();
       });
     });
+    this.updateUI();
 
     // Settings
     const settingsTrigger = document.querySelector("#settings-trigger button");

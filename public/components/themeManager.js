@@ -69,4 +69,5 @@ const ThemeManager = {
 // Initialize event listeners
 document.addEventListener("DOMContentLoaded", () => {
   ThemeManager.setupListeners();
+  ThemeManager.updateSwitcher();
 });

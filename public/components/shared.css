@@ -41,13 +41,13 @@
 }
 
 [data-theme="midnight"] {
-	--bg: #000;
-	--fg: #777;
+	--bg: #0a0a0a;
+	--fg: #555;
 	--hl: #fff;
-	--br: #222;
-	--accent: #f27645;
-	--accent-light: #f39a66;
-	--accent-dark: #f15025;
+	--br: #1a1a1a;
+	--accent: #00d9ff;
+	--accent-light: #33e5ff;
+	--accent-dark: #00a8cc;
 }
 
 * {

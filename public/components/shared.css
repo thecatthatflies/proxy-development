@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
 /* Constants */
 
 :root {
@@ -12,7 +14,6 @@
 
 	/* Typography */
 	--font-display: "Inter", "Segoe UI", sans-serif;
-	--font-mono: "JetBrains Mono", "Courier New", monospace;
 
 	/* Effects */
 	--transition-main: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -62,11 +63,14 @@ button {
 body {
 	background: var(--bg);
 	color: var(--fg);
-	font: clamp(9px, 0.8vw + 6px, 11px) / 1.6 var(--font-mono);
+	font-family: var(--font-display);
+	font-size: clamp(10px, 0.8vw + 6px, 12px);
+	font-weight: 500;
+	line-height: 1.6;
 	margin: 0;
 	padding: 5vh 8vw 120px 8vw;
 	text-transform: uppercase;
-	letter-spacing: 0.15em;
+	letter-spacing: 0.08em;
 	overflow-x: hidden;
 	scrollbar-gutter: stable;
 }
@@ -96,7 +100,7 @@ header a.logo {
 header a.logo h1 {
 	font-size: clamp(1.5rem, 4vw, 2.2rem);
 	font-weight: 700;
-	letter-spacing: -0.02em;
+	letter-spacing: -0.01em;
 	margin: 0;
 }
 
@@ -123,12 +127,14 @@ main {
 	background: none;
 	border: none;
 	color: inherit;
-	font: inherit;
+	font-family: var(--font-display);
+	font-weight: 500;
 	cursor: pointer;
 	font-size: 0.75rem;
 	padding: 0.4rem 0;
 	border-bottom: 2px solid transparent;
 	transition: var(--transition-main);
+	letter-spacing: 0.08em;
 }
 
 .switcher button:hover,
@@ -168,6 +174,7 @@ main {
 	margin: 0;
 	font-size: 1.1rem;
 	font-family: var(--font-display);
+	font-weight: 600;
 }
 
 .card p {
@@ -185,8 +192,9 @@ main {
 	text-decoration: none;
 	font-family: var(--font-display);
 	font-size: 0.75rem;
+	font-weight: 600;
 	text-transform: uppercase;
-	letter-spacing: inherit;
+	letter-spacing: 0.08em;
 	transition: var(--transition-main);
 	display: inline-flex;
 	align-items: center;
@@ -224,8 +232,9 @@ main {
 	text-decoration: none;
 	font-family: var(--font-display);
 	font-size: 0.75rem;
+	font-weight: 500;
 	text-transform: uppercase;
-	letter-spacing: inherit;
+	letter-spacing: 0.08em;
 	cursor: pointer;
 	transition: var(--transition-main);
 	text-align: center;

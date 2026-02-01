@@ -127,11 +127,11 @@ header {
   color: var(--bg);
   cursor: pointer;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   border-radius: 4px;
-  font: inherit;
   transition: background var(--transition-main), border-color var(--transition-main), box-shadow var(--transition-main), transform var(--transition-main);
 
   &:where(:hover, :focus-visible) {
@@ -165,8 +165,10 @@ header {
   align-items: center;
   border-radius: 4px;
   font-size: 0.75rem;
+  font-weight: 500;
+  font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   white-space: nowrap;
   max-width: 200px;
 
@@ -344,11 +346,12 @@ header {
 
 .error-subtitle {
   font-size: clamp(1.125rem, 4vw, 1.5rem);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--hl);
   margin: 1rem 0 1.5rem 0;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  font-family: var(--font-display);
 }
 
 .error-message {
@@ -366,10 +369,11 @@ header {
   color: var(--bg);
   text-decoration: none;
   border-radius: 4px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.875rem;
+  font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   transition: background var(--transition-main), border-color var(--transition-main), box-shadow var(--transition-main), transform var(--transition-main);
   border: 1px solid var(--accent);
 

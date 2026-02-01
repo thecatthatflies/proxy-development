@@ -31,6 +31,13 @@ const ProxyApp = {
         }
 
         this.setupUI();
+
+        try {
+            await registerSW();
+        } catch (err) {
+            this.showError("Failed to register service worker", err);
+        }
+
         this.addTab();
     },
 
@@ -202,7 +209,14 @@ const ProxyApp = {
     },
 
     switchTab(tabIdx) {
-        if (this.currentTab === tabIdx) return;
+        if (this.currentTab === tabIdx) {
+            // Even if already on this tab, ensure DOM is updated (for initial tab)
+            if (!$$(`  .tab[data-tab="${tabIdx}"]`)?.classList.contains("active")) {
+                $$(`  .tab[data-tab="${tabIdx}"]`)?.classList.add("active");
+                $$(`  .tab-content[data-tab="${tabIdx}"]`)?.classList.add("active");
+            }
+            return;
+        }
 
         const prev = this.currentTab;
         this.currentTab = tabIdx;

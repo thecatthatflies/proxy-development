@@ -6,9 +6,15 @@
     <title>Newton - Error</title>
     <base href="/" />
     <link rel="stylesheet" href="components/shared.css" />
-    <link rel="stylesheet" href="proxy/index.css" />
-    <script src="proxy/register-sw.js"></script>
-    <script src="components/themeManager.js"></script>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+    </style>
 </head>
 <body>
     <div class="error-page">
@@ -19,9 +25,11 @@
                 <p class="error-message">The server could not route your request.</p>
                 <p class="error-message">Please check the URL and try again.</p>
             </div>
-            <a href="/proxy/index.html" class="error-button">Go to Proxy</a>
+            <a href="/" class="error-button">Go Back</a>
         </div>
     </div>
-    <script src="../components/404.js"></script>
+
+    <script src="components/themeManager.js"></script>
+    <script src="components/404.js"></script>
 </body>
 </html>

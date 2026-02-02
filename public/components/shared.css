@@ -345,7 +345,11 @@ main {
 	font-family: var(--font-display);
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
-	transition: background var(--transition-main), border-color var(--transition-main), box-shadow var(--transition-main), transform var(--transition-main);
+	transition:
+		background var(--transition-main),
+		border-color var(--transition-main),
+		box-shadow var(--transition-main),
+		transform var(--transition-main);
 	border: 1px solid var(--accent);
 }
 

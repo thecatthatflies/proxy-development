@@ -343,7 +343,8 @@ class ChatBot {
 
 	renderConversationsList() {
 		this.conversationsList.innerHTML = "";
-		Object.entries(this.conversations).forEach(([id, conv]) => {
+		const conversations = Object.entries(this.conversations).reverse();
+		conversations.forEach(([id, conv]) => {
 			const item = document.createElement("div");
 			item.className = `conversation-item ${id === this.currentConversation ? "active" : ""}`;
 			item.dataset.id = id;

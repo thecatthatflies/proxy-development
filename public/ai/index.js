@@ -114,25 +114,107 @@ class ChatBot {
 		this.chatInput.style.height = "auto";
 		this.updateCharCount();
 
-		// Simulate typing indicator and response
+		// Show typing indicator and get response
 		this.showTypingIndicator();
 		this.isWaiting = true;
 
-		// Simulate API call with delay
-		setTimeout(() => {
-			const response = "I'm a placeholder response. Connect me to a real API to make me functional!";
+		this.getOllamaResponse();
+		this.saveConversations();
+	}
+
+	async getOllamaResponse() {
+		try {
+			// Get conversation messages for context
+			const conversationMessages = this.conversations[this.currentConversation].messages.map(msg => ({
+				role: msg.role,
+				content: msg.content
+			}));
+
+			const response = await fetch("/api/chat", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					messages: conversationMessages,
+				}),
+			});
+
+			if (!response.ok) {
+				this.removeTypingIndicator();
+				this.addMessage(`Error: Failed to get response (${response.status})`, "assistant");
+				this.isWaiting = false;
+				return;
+			}
+
 			this.removeTypingIndicator();
-			this.addMessage(response, "assistant");
+
+			// Create a message element for streaming response
+			const messageEl = document.createElement("div");
+			messageEl.className = "message assistant";
+			const contentEl = document.createElement("div");
+			contentEl.className = "message-content";
+			const textEl = document.createElement("p");
+			textEl.style.margin = "0";
+			contentEl.appendChild(textEl);
+			messageEl.appendChild(contentEl);
+			this.chatMessages.appendChild(messageEl);
+
+			// Stream the response
+			const reader = response.body.getReader();
+			const decoder = new TextDecoder();
+			let fullResponse = "";
+			let buffer = "";
+
+			while (true) {
+				const { done, value } = await reader.read();
+				if (done) break;
+
+				const chunk = decoder.decode(value);
+				buffer += chunk;
+
+				// Process complete JSON lines
+				const lines = buffer.split("\n");
+				buffer = lines[lines.length - 1]; // Keep incomplete line in buffer
+
+				for (let i = 0; i < lines.length - 1; i++) {
+					if (lines[i].trim()) {
+						try {
+							const json = JSON.parse(lines[i]);
+							if (json.message?.content) {
+								const content = json.message.content;
+								fullResponse += content;
+								textEl.textContent = fullResponse;
+								this.scrollToBottom();
+							}
+						} catch (e) {
+							// Skip JSON parse errors
+						}
+					}
+				}
+			}
+
+			// Add time to message
+			const timeEl = document.createElement("div");
+			timeEl.className = "message-time";
+			timeEl.textContent = this.formatTime(new Date());
+			contentEl.appendChild(timeEl);
+
+			// Save the complete response to conversation
 			this.conversations[this.currentConversation].messages.push({
 				role: "assistant",
-				content: response,
+				content: fullResponse,
 				timestamp: new Date().toISOString(),
 			});
+
 			this.isWaiting = false;
 			this.saveConversations();
-		}, 800);
-
-		this.saveConversations();
+		} catch (error) {
+			console.error("Error:", error);
+			this.removeTypingIndicator();
+			this.addMessage(`Error: ${error.message}`, "assistant");
+			this.isWaiting = false;
+		}
 	}
 
 	addMessage(text, role) {

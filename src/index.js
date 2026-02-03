@@ -58,6 +58,63 @@ fastify.register(fastifyStatic, {
 	decorateReply: false,
 });
 
+// Ollama Chat Endpoint
+fastify.post("/api/chat", async (request, reply) => {
+	const { messages } = request.body;
+
+	if (!messages || !Array.isArray(messages)) {
+		return reply.code(400).send({ error: "messages array is required" });
+	}
+
+	const OLLAMA_URL = process.env.OLLAMA_URL || "http://localhost:11434";
+	const MODEL = process.env.OLLAMA_MODEL || "llama2-uncensored";
+
+	try {
+		const response = await fetch(`${OLLAMA_URL}/api/chat`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				model: MODEL,
+				messages: messages,
+				stream: true,
+			}),
+		});
+
+		if (!response.ok) {
+			return reply.code(response.status).send({
+				error: `Ollama error: ${response.statusText}`,
+			});
+		}
+
+		// Stream the response
+		reply.type("application/x-ndjson");
+		const reader = response.body.getReader();
+		const decoder = new TextDecoder();
+
+		try {
+			while (true) {
+				const { done, value } = await reader.read();
+				if (done) break;
+
+				const chunk = decoder.decode(value);
+				reply.raw.write(chunk);
+			}
+		} finally {
+			reader.releaseLock();
+		}
+
+		reply.raw.end();
+	} catch (error) {
+		console.error("Ollama API error:", error);
+		return reply.code(500).send({
+			error: "Failed to connect to Ollama",
+			details: error.message,
+		});
+	}
+});
+
 fastify.setNotFoundHandler((res, reply) => {
 	return reply.code(404).type("text/html").sendFile("404.html");
 });

@@ -1,11 +1,11 @@
 @import url("../components/shared.css");
 
 h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
+	font-family: var(--font-display);
+	font-weight: 700;
 }
 
 h3 {
-  font-family: var(--font-display);
-  font-weight: 600;
+	font-family: var(--font-display);
+	font-weight: 600;
 }

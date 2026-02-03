@@ -1,28 +1,7 @@
 @import url("../components/shared.css");
 
-main {
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-}
-
-.section {
-	display: flex;
-	gap: 2rem;
-	flex-wrap: wrap;
-	align-items: stretch;
-}
-
+/* Homepage-specific overrides */
 .card {
-	flex: 1;
-	min-width: 200px;
-	padding: 2rem;
-	border: 1px solid var(--br);
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	gap: 1.5rem;
-	transition: var(--transition-main);
 	text-decoration: none;
 	color: inherit;
 }
@@ -30,16 +9,4 @@ main {
 .card:hover {
 	border-color: var(--accent);
 	background: rgba(241, 80, 37, 0.08);
-}
-
-.card h3 {
-	margin: 0;
-	font-size: 1.1rem;
-	font-family: var(--font-display);
-}
-
-.card p {
-	margin: 0;
-	color: var(--fg);
-	line-height: 1.8;
 }

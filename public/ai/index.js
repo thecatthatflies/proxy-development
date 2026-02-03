@@ -348,11 +348,36 @@ class ChatBot {
 			item.className = `conversation-item ${id === this.currentConversation ? "active" : ""}`;
 			item.dataset.id = id;
 			item.innerHTML = `
-                <div class="conversation-title">${this.escapeHtml(conv.title)}</div>
-                <button class="delete-conversation" title="Delete">×</button>
+                <div class="conversation-title" title="${this.escapeHtml(conv.title)}">${this.escapeHtml(conv.title)}</div>
+                <div class="conversation-actions">
+                    <button class="rename-conversation" title="Rename">✎</button>
+                    <button class="delete-conversation" title="Delete">×</button>
+                </div>
             `;
 			this.conversationsList.appendChild(item);
 		});
+
+		// Add event listeners for rename buttons
+		this.conversationsList.querySelectorAll(".rename-conversation").forEach((btn) => {
+			btn.addEventListener("click", (e) => {
+				e.stopPropagation();
+				const item = btn.closest(".conversation-item");
+				this.renameConversation(item.dataset.id);
+			});
+		});
+	}
+
+	renameConversation(id) {
+		const currentTitle = this.conversations[id].title;
+		Dialog.input(
+			"Rename conversation:",
+			currentTitle,
+			(newTitle) => {
+				this.conversations[id].title = newTitle;
+				this.saveConversations();
+				this.renderConversationsList();
+			}
+		);
 	}
 
 	updateCharCount() {

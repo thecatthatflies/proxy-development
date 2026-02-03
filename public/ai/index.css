@@ -400,11 +400,23 @@ header a.logo h1 {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		min-width: 0;
+	}
+
+	.conversation-actions {
+		display: flex;
+		gap: 0.25rem;
+		opacity: 0;
+		transition: opacity 0.15s;
 	}
 
 	&:hover {
 		.conversation-title {
 			color: var(--hl);
+		}
+
+		.conversation-actions {
+			opacity: 1;
 		}
 	}
 
@@ -415,15 +427,20 @@ header a.logo h1 {
 		.conversation-title {
 			color: var(--hl);
 		}
+
+		.conversation-actions {
+			opacity: 1;
+		}
 	}
 }
 
+.rename-conversation,
 .delete-conversation {
 	background: transparent;
 	border: none;
-	color: transparent;
+	color: var(--fg);
 	cursor: pointer;
-	font-size: 1.2rem;
+	font-size: 0.9rem;
 	padding: 0;
 	width: 1.5rem;
 	height: 1.5rem;
@@ -431,14 +448,19 @@ header a.logo h1 {
 	align-items: center;
 	justify-content: center;
 	transition: color 0.15s;
+	flex-shrink: 0;
+
+	&:hover {
+		color: var(--accent);
+	}
+}
+
+.delete-conversation {
+	font-size: 1.2rem;
 
 	&:hover {
 		color: #ff5f57;
 	}
-}
-
-.conversation-item:hover .delete-conversation {
-	color: var(--fg);
 }
 
 /* Typing Indicator */

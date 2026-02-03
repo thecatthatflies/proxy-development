@@ -16,8 +16,27 @@ class ChatBot {
 		this.conversationsList = document.getElementById("conversations-list");
 
 		this.conversations = this.loadConversations();
-		this.currentConversation = "default";
 		this.isWaiting = false;
+
+		// Ensure there's always a default conversation
+		if (!this.conversations.default) {
+			this.conversations.default = {
+				title: "New Conversation",
+				messages: [],
+				created: new Date().toISOString(),
+			};
+		}
+
+		// Set current conversation - prefer default, otherwise first available
+		this.currentConversation = "default";
+		if (Object.keys(this.conversations).length === 0) {
+			// This better not happen
+			this.conversations.default = {
+				title: "New Conversation",
+				messages: [],
+				created: new Date().toISOString(),
+			};
+		}
 
 		this.thinkingWords = [
 			"Accomplishing", "Actioning", "Actualizing", "Baking", "Brewing",
@@ -73,7 +92,7 @@ class ChatBot {
 
 	sendMessage() {
 		const text = this.chatInput.value.trim();
-		if (!text || this.isWaiting) return;
+		if (!text || this.isWaiting || !this.currentConversation) return;
 
 		// Add user message
 		this.addMessage(text, "user");
@@ -188,9 +207,14 @@ class ChatBot {
 			() => {
 				delete this.conversations[id];
 
-				// If all conversations are deleted, clear current
+				// If all conversations are deleted, create a new default one
 				if (Object.keys(this.conversations).length === 0) {
-					this.currentConversation = null;
+					this.conversations.default = {
+						title: "New Conversation",
+						messages: [],
+						created: new Date().toISOString(),
+					};
+					this.currentConversation = "default";
 				} else if (id === this.currentConversation) {
 					// If deleted conversation was active, switch to first available
 					this.currentConversation = Object.keys(this.conversations)[0];
@@ -298,9 +322,6 @@ class ChatBot {
 // Initialize chatbot when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
 	new ChatBot();
-
-	// Render Lucide icons
-	if (typeof lucide !== "undefined") {
-		lucide.createIcons();
-	}
+	loadNavbar("../components/navbar.html");
+	lucide.createIcons();
 });

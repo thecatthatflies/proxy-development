@@ -10,29 +10,29 @@
  * @param {string} html - HTML content to insert
  */
 function insertHTMLWithScripts(container, html) {
-  if (!container) {
-    console.warn("Container is null or undefined");
-    return;
-  }
+	if (!container) {
+		console.warn("Container is null or undefined");
+		return;
+	}
 
-  container.innerHTML = html;
+	container.innerHTML = html;
 
-  // Re-execute script tags so they run properly
-  container.querySelectorAll("script").forEach((oldScript) => {
-    const newScript = document.createElement("script");
+	// Re-execute script tags so they run properly
+	container.querySelectorAll("script").forEach((oldScript) => {
+		const newScript = document.createElement("script");
 
-    if (oldScript.src) {
-      // External script
-      newScript.src = oldScript.src;
-      newScript.async = false;
-    } else {
-      // Inline script
-      newScript.textContent = oldScript.textContent;
-    }
+		if (oldScript.src) {
+			// External script
+			newScript.src = oldScript.src;
+			newScript.async = false;
+		} else {
+			// Inline script
+			newScript.textContent = oldScript.textContent;
+		}
 
-    // Replace the original script with the new one (which executes it)
-    oldScript.parentNode.replaceChild(newScript, oldScript);
-  });
+		// Replace the original script with the new one (which executes it)
+		oldScript.parentNode.replaceChild(newScript, oldScript);
+	});
 }
 
 // Track if navbar has been loaded to prevent duplicate loads
@@ -45,34 +45,34 @@ let navbarLoaded = false;
  * @returns {Promise<void>}
  */
 function loadNavbar(navPath, containerId = "navbar-container") {
-  // Guard: prevent loading navbar multiple times
-  if (navbarLoaded) {
-    return Promise.resolve();
-  }
+	// Guard: prevent loading navbar multiple times
+	if (navbarLoaded) {
+		return Promise.resolve();
+	}
 
-  const container = document.getElementById(containerId);
+	const container = document.getElementById(containerId);
 
-  if (!container) {
-    console.warn(`Navbar container "${containerId}" not found.`);
-    return Promise.reject(new Error(`Navbar container "${containerId}" not found`));
-  }
+	if (!container) {
+		console.warn(`Navbar container "${containerId}" not found.`);
+		return Promise.reject(new Error(`Navbar container "${containerId}" not found`));
+	}
 
-  navbarLoaded = true;
+	navbarLoaded = true;
 
-  return fetch(navPath)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          `Failed to load ${navPath}: ${response.status} ${response.statusText}`
-        );
-      }
-      return response.text();
-    })
-    .then((html) => {
-      insertHTMLWithScripts(container, html);
-    })
-    .catch((error) => {
-      console.error("Failed to load navbar component:", error);
-      navbarLoaded = false; // Reset flag on error so it can retry
-    });
+	return fetch(navPath)
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error(
+					`Failed to load ${navPath}: ${response.status} ${response.statusText}`
+				);
+			}
+			return response.text();
+		})
+		.then((html) => {
+			insertHTMLWithScripts(container, html);
+		})
+		.catch((error) => {
+			console.error("Failed to load navbar component:", error);
+			navbarLoaded = false; // Reset flag on error so it can retry
+		});
 }

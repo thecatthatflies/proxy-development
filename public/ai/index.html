@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Newton - AI Chatbot</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="../components/themeManager.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="../homepage/index.html" class="logo">
+            <h1>Newton</h1>
+        </a>
+        <div class="switchers">
+            <div class="switcher" id="theme-switcher">
+                <button id="theme-quartz">QUARTZ</button>
+                <button id="theme-slate">SLATE</button>
+                <button id="theme-midnight">MIDNIGHT</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="chat-container">
+        <div class="chat-panel">
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chat-messages">
+                <div class="message system-message">
+                    <div class="message-content">
+                        <p>Welcome to Newton AI. How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <textarea id="chat-input" placeholder="Ask me anything..." rows="1"></textarea>
+                    <button id="send-btn" class="send-btn" title="Send message">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+                <div class="input-info">
+                    <span class="char-count"><span id="char-count">0</span>/2000</span>
+                    <button id="clear-btn" class="clear-btn">CLEAR</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="chat-sidebar">
+            <div class="sidebar-header">
+                <h3>CONVERSATIONS</h3>
+                <button id="new-chat-btn" class="new-chat-btn" title="New conversation">
+                    <i data-lucide="plus"></i>
+                    NEW
+                </button>
+            </div>
+            <div class="conversations-list" id="conversations-list">
+                <div class="conversation-item active" data-id="default">
+                    <div class="conversation-title">New Conversation</div>
+                    <button class="delete-conversation" title="Delete">×</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="navbar-container"></div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../components/componentLoader.js"></script>
+    <script src="../components/dialog.js"></script>
+    <script src="index.js" defer></script>
+    <script defer>
+        loadNavbar('../components/navbar.html');
+    </script>
+</body>
+
+</html>

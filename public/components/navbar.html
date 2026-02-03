@@ -2,6 +2,7 @@
     <a id="nav-home" class="nav-btn" href="">HOME</a>
     <a id="nav-games" class="nav-btn" href="">GAMES</a>
     <a id="nav-proxy" class="nav-btn" href="">PROXY</a>
+    <a id="nav-ai" class="nav-btn" href="">AI CHATBOT</a>
     <a id="nav-about" class="nav-btn" href="">ABOUT</a>
 </nav>
 
@@ -15,7 +16,7 @@
         document.getElementById('nav-games').href = isHomepage ? '../games/index.html' : '../../games/index.html';
         document.getElementById('nav-proxy').href = isHomepage ? '../proxy/index.html' : '../../proxy/index.html';
         document.getElementById('nav-about').href = isHomepage ? '../about/index.html' : '../../about/index.html';
-
+        document.getElementById('nav-ai').href = isHomepage ? '../ai/index.html' : '../../ai/index.html';
         // Clear active classes
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
 
@@ -26,8 +27,10 @@
             document.getElementById('nav-proxy').classList.add('active');
         } else if (path.includes('/games')) {
             document.getElementById('nav-games').classList.add('active');
-        } else {
+        } else if (isHomepage) {
             document.getElementById('nav-home').classList.add('active');
+        } else if (path.includes('/ai')) {
+            document.getElementById('nav-ai').classList.add('active');
         }
     }
 

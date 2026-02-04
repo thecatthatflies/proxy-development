@@ -1,10 +1,6 @@
 "use strict";
 
-/**
- * AI Chatbot Interface
- * Manages conversation history, message display, and user interactions
- */
-
+// ChatBot class manages conversation history, message display, and user interactions
 class ChatBot {
 	constructor() {
 		this.chatMessages = document.getElementById("chat-messages");
@@ -30,7 +26,7 @@ class ChatBot {
 		// Set current conversation - prefer default, otherwise first available
 		this.currentConversation = "default";
 		if (Object.keys(this.conversations).length === 0) {
-			// This better not happen
+			// Ensure default conversation exists
 			this.conversations.default = {
 				title: "New Conversation",
 				messages: [],

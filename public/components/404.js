@@ -1,8 +1,4 @@
-/**
- * 404 Error Page Component
- * Provides configurable error page with defaults
- */
-
+// 404 Error Page Component - provides configurable error page with defaults
 function setup404Page(config = {}) {
   const defaults = {
     title: "404",

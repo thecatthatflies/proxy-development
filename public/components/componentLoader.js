@@ -1,14 +1,8 @@
 "use strict";
 
-/**
- * Component loader utility
- */
+// Component loader utility
 
-/**
- * Insert HTML content and execute any contained scripts
- * @param {HTMLElement} container - Target container element
- * @param {string} html - HTML content to insert
- */
+// Insert HTML content and execute any contained scripts
 function insertHTMLWithScripts(container, html) {
 	if (!container) {
 		console.warn("Container is null or undefined");
@@ -38,12 +32,7 @@ function insertHTMLWithScripts(container, html) {
 // Track if navbar has been loaded to prevent duplicate loads
 let navbarLoaded = false;
 
-/**
- * Load navbar component (once per session)
- * @param {string} navPath - Path to navbar HTML file
- * @param {string} containerId - ID of container element (default: "navbar-container")
- * @returns {Promise<void>}
- */
+// Load navbar component (once per session)
 function loadNavbar(navPath, containerId = "navbar-container") {
 	// Guard: prevent loading navbar multiple times
 	if (navbarLoaded) {

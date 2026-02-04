@@ -48,11 +48,11 @@ const App = {
 	},
 
 	setupUI() {
-		// Search
+		// Setup search functionality
 		const search = $("gameSearch");
 		if (search) search.addEventListener("input", (e) => this.render(e.target.value));
 
-		// Mode switcher
+		// Setup mode switcher
 		document.querySelectorAll(".switcher button[id^='mode-']").forEach((btn) => {
 			btn.addEventListener("click", (e) => {
 				MODE = e.target.id.replace("mode-", "");
@@ -62,7 +62,7 @@ const App = {
 		});
 		this.updateUI();
 
-		// Settings
+		// Setup settings modal
 		const settingsTrigger = document.querySelector("#settings-trigger button");
 		if (settingsTrigger) settingsTrigger.addEventListener("click", () => this.toggleSettings());
 
@@ -72,7 +72,7 @@ const App = {
 			modal.querySelector(".close-btn")?.addEventListener("click", () => this.toggleSettings());
 		}
 
-		// Window controls
+		// Setup window controls
 		const winBar = $("window-bar");
 		if (winBar) {
 			winBar.querySelector(".dot.close")?.addEventListener("click", () => this.close());

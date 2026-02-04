@@ -11,7 +11,7 @@ import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 
 const publicPath = fileURLToPath(new URL("../public/", import.meta.url));
 
-// Wisp Configuration: Refer to the documentation at https://www.npmjs.com/package/@mercuryworkshop/wisp-js
+// Configure Wisp proxy settings (see https://www.npmjs.com/package/@mercuryworkshop/wisp-js)
 
 logging.set_level(logging.NONE);
 Object.assign(wisp.options, {
@@ -58,7 +58,7 @@ fastify.register(fastifyStatic, {
 	decorateReply: false,
 });
 
-// Ollama Chat Endpoint
+// Handle Ollama chat API requests
 fastify.post("/api/chat", async (request, reply) => {
 	const { messages } = request.body;
 
@@ -122,8 +122,7 @@ fastify.setNotFoundHandler((res, reply) => {
 fastify.server.on("listening", () => {
 	const address = fastify.server.address();
 
-	// by default we are listening on 0.0.0.0 (every interface)
-	// we just need to list a few
+	// Print listening addresses (by default 0.0.0.0 listens on all interfaces)
 	console.log("Listening on:");
 	console.log(`\thttp://localhost:${address.port}`);
 	console.log(`\thttp://${hostname()}:${address.port}`);

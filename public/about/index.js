@@ -1,6 +1,6 @@
 "use strict";
 
-// Event listener for theme switcher buttons
+// Handle theme switcher button clicks
 document.addEventListener("DOMContentLoaded", () => {
 	document.querySelectorAll(".switcher button[id^='theme-']").forEach((button) => {
 		button.addEventListener("click", (e) => {

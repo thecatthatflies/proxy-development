@@ -42,7 +42,7 @@ const ProxyApp = {
 	},
 
 	setupUI() {
-		// Fullscreen
+		// Setup fullscreen button
 		const fsBtn = $("fullscreen-btn");
 		if (fsBtn) {
 			fsBtn.addEventListener("click", () => this.toggleFullscreen());
@@ -51,7 +51,7 @@ const ProxyApp = {
 			);
 		}
 
-		// Navigation
+		// Setup navigation buttons
 		["back-btn", "forward-btn", "refresh-btn"].forEach(id => {
 			const btn = $(id);
 			if (btn) {
@@ -60,13 +60,13 @@ const ProxyApp = {
 			}
 		});
 
-		// Address bar
+		// Setup address bar and search functionality
 		const searchBtn = $("search-btn");
 		const addressBar = $("address-bar");
 		if (searchBtn) searchBtn.addEventListener("click", () => this.handleNavigation());
 		if (addressBar) addressBar.addEventListener("keydown", (e) => e.key === "Enter" && this.handleNavigation());
 
-		// Tabs
+		// Setup tabs and tab management
 		const tabsBar = $$(".tabs-bar");
 		const tabAdd = $$(".tab-add");
 		if (tabAdd) tabAdd.addEventListener("click", () => this.addTab());

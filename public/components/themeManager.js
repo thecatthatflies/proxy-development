@@ -1,34 +1,24 @@
 "use strict";
 
-/**
- * Centralized theme management module
- */
-
+// Centralized theme management module
 const THEME_KEY = "newton-theme";
 const DEFAULT_THEME = "quartz";
 
 const ThemeManager = {
-	/**
-	 * Initialize theme from localStorage or use default
-	 */
+	// Initialize theme from localStorage or use default
 	init() {
 		const saved = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
 		this.setTheme(saved);
 	},
 
-	/**
-	 * Set active theme and update UI
-	 * @param {string} theme - Theme name (quartz, slate, midnight)
-	 */
+	// Set active theme and update UI
 	setTheme(theme) {
 		document.documentElement.setAttribute("data-theme", theme);
 		localStorage.setItem(THEME_KEY, theme);
 		this.updateSwitcher();
 	},
 
-	/**
-	 * Update theme switcher UI to show active theme
-	 */
+	// Update theme switcher UI to show active theme
 	updateSwitcher() {
 		const currentTheme = localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
 		const switchers = document.querySelectorAll(".switcher button[id^='theme-']");
@@ -39,17 +29,12 @@ const ThemeManager = {
 		});
 	},
 
-	/**
-	 * Get current active theme
-	 * @returns {string} Active theme name
-	 */
+	// Get current active theme
 	getCurrentTheme() {
 		return localStorage.getItem(THEME_KEY) || DEFAULT_THEME;
 	},
 
-	/**
-	 * Setup theme switcher event listeners (called once during init)
-	 */
+	// Setup theme switcher event listeners (called once during init)
 	setupListeners() {
 		document.querySelectorAll(".switcher button[id^='theme-']").forEach((btn) => {
 			btn.addEventListener("click", (e) => {

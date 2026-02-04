@@ -1,16 +1,8 @@
 "use strict";
 
-/**
- * Custom modal dialog component for confirmations and alerts
- */
-
+// Custom modal dialog component for confirmations and alerts
 const Dialog = {
-	/**
-	 * Show a confirmation dialog
-	 * @param {string} message - Message to display
-	 * @param {function} onConfirm - Callback when user confirms
-	 * @param {function} onCancel - Callback when user cancels
-	 */
+	// Show a confirmation dialog
 	confirm(message, onConfirm, onCancel) {
 		const backdrop = document.createElement("div");
 		backdrop.className = "dialog-backdrop";
@@ -58,13 +50,7 @@ const Dialog = {
 		confirmBtn.focus();
 	},
 
-	/**
-	 * Show an input dialog
-	 * @param {string} message - Message to display
-	 * @param {string} initialValue - Initial input value
-	 * @param {function} onSubmit - Callback with input value when user submits
-	 * @param {function} onCancel - Callback when user cancels
-	 */
+	// Show an input dialog
 	input(message, initialValue = "", onSubmit, onCancel) {
 		const backdrop = document.createElement("div");
 		backdrop.className = "dialog-backdrop";
@@ -128,9 +114,7 @@ const Dialog = {
 		input.focus();
 	},
 
-	/**
-	 * Escape HTML to prevent XSS
-	 */
+	// Escape HTML to prevent XSS
 	escapeHtml(text) {
 		const div = document.createElement("div");
 		div.textContent = text;

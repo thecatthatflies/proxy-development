@@ -1,11 +1,11 @@
 "use strict";
 
-// Initialize
+// Load navbar on page load
 document.addEventListener("DOMContentLoaded", () => {
 	loadNavbar('../components/navbar.html');
 });
 
-// Event listener for theme switcher buttons
+// Handle theme switcher button clicks
 document.addEventListener("DOMContentLoaded", () => {
 	document.querySelectorAll(".switcher button[id^='theme-']").forEach((button) => {
 		button.addEventListener("click", (e) => {

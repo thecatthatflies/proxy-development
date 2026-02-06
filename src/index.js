@@ -68,8 +68,12 @@ fastify.post("/api/chat", async (request, reply) => {
 
 	const OLLAMA_URL = process.env.OLLAMA_URL || "http://localhost:11434";
 	const MODEL = process.env.OLLAMA_MODEL || "llama2-uncensored";
+	const REQUEST_TIMEOUT = 120000; // 2 minutes max per request
 
 	try {
+		const controller = new AbortController();
+		const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+
 		const response = await fetch(`${OLLAMA_URL}/api/chat`, {
 			method: "POST",
 			headers: {
@@ -80,11 +84,16 @@ fastify.post("/api/chat", async (request, reply) => {
 				messages: messages,
 				stream: true,
 			}),
+			signal: controller.signal,
 		});
 
+		clearTimeout(timeoutId);
+
 		if (!response.ok) {
+			console.error(`Ollama API error: ${response.status} ${response.statusText}`);
 			return reply.code(response.status).send({
 				error: `Ollama error: ${response.statusText}`,
+				model: MODEL,
 			});
 		}
 
@@ -107,10 +116,51 @@ fastify.post("/api/chat", async (request, reply) => {
 
 		reply.raw.end();
 	} catch (error) {
-		console.error("Ollama API error:", error);
-		return reply.code(500).send({
-			error: "Failed to connect to Ollama",
+		if (error.name === "AbortError") {
+			console.error("Ollama request timeout after 2 minutes");
+			return reply.code(504).send({
+				error: "Request timeout - Ollama took too long to respond",
+			});
+		}
+
+		console.error("Ollama API error:", error.message);
+		return reply.code(503).send({
+			error: "Ollama service unavailable",
 			details: error.message,
+			hint: `Check if Ollama is running at ${OLLAMA_URL}`,
+		});
+	}
+});
+
+// Health check endpoint for external Ollama
+fastify.get("/api/health", async (request, reply) => {
+	const OLLAMA_URL = process.env.OLLAMA_URL || "http://localhost:11434";
+
+	try {
+		const response = await fetch(`${OLLAMA_URL}/api/tags`, {
+			timeout: 5000,
+		});
+
+		if (!response.ok) {
+			return reply.code(503).send({
+				status: "unhealthy",
+				ollama: "unavailable",
+				message: `Ollama returned status ${response.status}`,
+			});
+		}
+
+		const data = await response.json();
+		return reply.send({
+			status: "healthy",
+			ollama: "connected",
+			models: data.models?.length || 0,
+		});
+	} catch (error) {
+		console.error("Health check failed:", error.message);
+		return reply.code(503).send({
+			status: "unhealthy",
+			ollama: "disconnected",
+			error: error.message,
 		});
 	}
 });

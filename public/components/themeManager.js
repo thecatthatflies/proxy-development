@@ -1,7 +1,7 @@
 "use strict";
 
 // Centralized theme management module
-const THEME_KEY = "newton-theme";
+const THEME_KEY = "uncensored-theme";
 const DEFAULT_THEME = "quartz";
 
 const ThemeManager = {

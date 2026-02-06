@@ -1,9 +1,9 @@
 "use strict";
 
 // Constants
-const CLOAK_TITLE_KEY = "newton-cloak-title";
-const CLOAK_FAVICON_KEY = "newton-cloak-favicon";
-const MODE_KEY = "newton-mode";
+const CLOAK_TITLE_KEY = "uncensored-cloak-title";
+const CLOAK_FAVICON_KEY = "uncensored-cloak-favicon";
+const MODE_KEY = "uncensored-mode";
 const DEFAULT_MODE = "window";
 const DEFAULT_CLOAK_TITLE = "Google";
 const DEFAULT_CLOAK_FAVICON = "https://www.google.com/favicon.ico";

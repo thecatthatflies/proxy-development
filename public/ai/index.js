@@ -325,7 +325,7 @@ class ChatBot {
 			this.chatMessages.innerHTML = `
                 <div class="message system-message">
                     <div class="message-content">
-                        <p>Welcome to Newton AI. How can I help you today?</p>
+                        <p>Welcome to Uncensored AI. How can I help you today?</p>
                     </div>
                 </div>
             `;

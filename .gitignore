@@ -1,3 +1,5 @@
 node_modules
 .DS_Store
 scramjet/
+src/firebase.js
+public/firebase.js

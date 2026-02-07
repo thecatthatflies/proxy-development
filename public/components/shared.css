@@ -33,9 +33,9 @@
 
 [data-theme="slate"] {
 	--bg: #222;
-	--fg: #888;
-	--hl: #eee;
-	--br: #333;
+	--fg: #aaa;
+	--hl: #fff;
+	--br: #444;
 	--accent: #f15025;
 	--accent-light: #f27645;
 	--accent-dark: #d43d1f;
@@ -43,12 +43,12 @@
 
 [data-theme="midnight"] {
 	--bg: #0a0a0a;
-	--fg: #ccc;
-	--hl: #fff;
+	--fg: #b0b0b0;
+	--hl: #e8e8e8;
 	--br: #1a1a1a;
-	--accent: #00d9ff;
-	--accent-light: #33e5ff;
-	--accent-dark: #00a8cc;
+	--accent: #00bfff;
+	--accent-light: #1ed4ff;
+	--accent-dark: #0099cc;
 }
 
 * {

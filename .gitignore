@@ -9,3 +9,5 @@ scramjet/
 
 # Cloudflare tunnel config
 cloudflare-tunnel.yml
+public/firebase.js
+src/firebase.js

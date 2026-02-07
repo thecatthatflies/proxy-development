@@ -1,0 +1,37 @@
+# fly-ollama.toml - Ollama Machine Configuration for Fly.io
+# Deploy with: fly deploy --config fly-ollama.toml --app uncensored-ollama --image ollama/ollama:latest
+# Create app first: fly apps create uncensored-ollama
+# Create volume: fly volumes create ollama_models --region iad --size 10 --app uncensored-ollama
+
+app = 'uncensored-ollama'
+primary_region = 'iad'
+
+[build]
+  image = 'ollama/ollama:latest'
+
+[env]
+  OLLAMA_HOST = '0.0.0.0:11434'
+
+[http_service]
+  internal_port = 11434
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  memory = '4gb'
+  cpu_kind = 'shared'
+  cpus = 2
+
+[[mounts]]
+  source = 'ollama_models'
+  destination = '/root/.ollama'
+  initial_size = '10gb'
+
+# Optional: GPU support for faster inference (expensive)
+# Uncomment and adjust as needed. GPU options: a40, a100-40gb, a100-80gb, l40s, rtx6000
+# [[vm]]
+#   memory = '8gb'
+#   cpu_kind = 'performance'
+#   cpus = 4
+#   gpu_kind = 'a40'

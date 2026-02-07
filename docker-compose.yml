@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_MODEL=llama2-uncensored
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    depends_on:
+      - ollama
+    command: pnpm run dev:watch
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+
+volumes:
+  ollama_data:

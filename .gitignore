@@ -1,5 +1,11 @@
 node_modules
 .DS_Store
 scramjet/
-src/firebase.js
-public/firebase.js
+
+# Environment files (except template)
+.env.development
+.env.production
+.env.staging
+
+# Cloudflare tunnel config
+cloudflare-tunnel.yml

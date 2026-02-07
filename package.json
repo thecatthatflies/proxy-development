@@ -9,6 +9,10 @@
 	},
 	"scripts": {
 		"start": "node src/index.js",
+		"dev": "node --env-file=.env.development src/index.js",
+		"dev:watch": "nodemon --env-file=.env.development src/index.js",
+		"tunnel": "cloudflared tunnel --url http://localhost:3000",
+		"tunnel:run": "cloudflared tunnel run uncensored-dev",
 		"format": "prettier --write .",
 		"lint": "eslint ./src/",
 		"lint:fix": "eslint ./src/ --fix"
@@ -25,12 +29,11 @@
 		"@mercuryworkshop/scramjet": "https://github.com/MercuryWorkshop/scramjet/releases/download/latest/mercuryworkshop-scramjet-2.0.0-alpha.tgz",
 		"@mercuryworkshop/wisp-js": "^0.4.1",
 		"fastify": "^5.4.0",
-		"firebase": "^12.9.0",
-		"firebase-admin": "^13.6.1",
 		"ws": "^8.18.3"
 	},
 	"devDependencies": {
 		"eslint": "^9.13.0",
+		"nodemon": "^3.1.0",
 		"prettier": "^3.3.3"
 	},
 	"packageManager": "pnpm@10.18.3"

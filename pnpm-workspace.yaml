@@ -1,5 +1,4 @@
 onlyBuiltDependencies:
-  - '@firebase/util'
   - '@mercuryworkshop/scramjet'
   - bufferutil
   - protobufjs

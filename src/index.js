@@ -9,6 +9,11 @@ import { scramjetPath } from "@mercuryworkshop/scramjet/path";
 import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 
+// Log environment on startup
+console.log(`[${new Date().toISOString()}] Starting Uncensored Proxy`);
+console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+console.log(`Ollama URL: ${process.env.OLLAMA_URL || "http://localhost:11434"}`);
+
 const publicPath = fileURLToPath(new URL("../public/", import.meta.url));
 
 // Configure Wisp proxy settings (see https://www.npmjs.com/package/@mercuryworkshop/wisp-js)
